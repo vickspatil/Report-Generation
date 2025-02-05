@@ -4,6 +4,7 @@ import cohere
 from pathlib import Path
 from datetime import datetime
 from collections import Counter
+from dotenv import load_dotenv
 
 def process_files(directory_path, cohere_api_key):
     """Process all CSV and Excel files (including all sheets) in the directory and extract insights."""
@@ -70,6 +71,7 @@ def generate_markdown_report(analysis):
 def main(directory_path, cohere_api_key):
     results = process_files(directory_path, cohere_api_key)
     report = generate_markdown_report(results)
+    load_dotenv()
     
     output_file = f"cybersecurity_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
     with open(output_file, 'w') as f:
@@ -77,6 +79,6 @@ def main(directory_path, cohere_api_key):
     
     return output_file
 
-cohere_api_key = "ElUtPfGNIVgtES1DxtN0gCwMXmiSV1NF1QlY6w9i"
-directory_path = "D:/projecta/gpt-neox/data"
+cohere_api_key = os.getnv("COHERE_API_KEY")
+directory_path = os.getenv("DATA_DIRECTORY")
 output_file = main(directory_path, cohere_api_key)
