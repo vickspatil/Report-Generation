@@ -51,7 +51,7 @@ Most Repeated CVEs:\n{cve_counts}\n"""
     
     response = co.generate(
         prompt=prompt,
-        max_tokens=400,
+        max_tokens=700,
         temperature=0.3,
         presence_penalty=0.5
     )
