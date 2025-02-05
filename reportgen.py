@@ -71,14 +71,11 @@ def generate_markdown_report(analysis):
 def main(directory_path, cohere_api_key):
     results = process_files(directory_path, cohere_api_key)
     report = generate_markdown_report(results)
-    load_dotenv()
-    
     output_file = f"cybersecurity_summary_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
     with open(output_file, 'w') as f:
         f.write(report)
-    
     return output_file
-
+load_dotenv()
 cohere_api_key = os.getnv("COHERE_API_KEY")
 directory_path = os.getenv("DATA_DIRECTORY")
 output_file = main(directory_path, cohere_api_key)
